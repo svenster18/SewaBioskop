@@ -1,5 +1,6 @@
 package com.aufairfani.sewabioskop
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +23,10 @@ class MovieAdapter(private val listMovie: List<ItemsItem>) : RecyclerView.Adapte
         val hour = listMovie[position].runtimeMins.toInt() / 60
         val min = listMovie[position].runtimeMins.toInt() % 60
         viewHolder.tvDuration.text = "${hour}h${min}m"
+        viewHolder.itemView.setOnClickListener {
+            val intent = Intent(viewHolder.itemView.context, MapsActivity::class.java)
+            viewHolder.itemView.context.startActivity(intent)
+        }
     }
     override fun getItemCount(): Int = listMovie.size
 
