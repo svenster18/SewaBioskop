@@ -27,11 +27,12 @@
             app:srcCompat="@drawable/megan" />
 
         <TextView
-            android:id="@+id/tv_tittle"
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:fontFamily="sans-serif"
+            android:textAlignment="center"
             android:text="MEGAN"
             android:textColor="#29282C"
             android:textSize="18sp"
@@ -51,7 +52,7 @@
             app:layout_constraintEnd_toEndOf="@+id/iv_movie"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="@+id/iv_movie"
-            app:layout_constraintTop_toBottomOf="@+id/tv_tittle" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
         <ImageView
             android:id="@+id/iv_rating"
