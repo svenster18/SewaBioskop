@@ -17,7 +17,7 @@
         android:padding="8dp">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/iv_movie"
             android:layout_width="180dp"
             android:layout_height="240dp"
             android:scaleType="centerCrop"
@@ -27,7 +27,7 @@
             app:srcCompat="@drawable/megan" />
 
         <TextView
-            android:id="@+id/tv_megan"
+            android:id="@+id/tv_tittle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -36,9 +36,9 @@
             android:textColor="#29282C"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/imageView"
-            app:layout_constraintStart_toStartOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintEnd_toEndOf="@+id/iv_movie"
+            app:layout_constraintStart_toStartOf="@+id/iv_movie"
+            app:layout_constraintTop_toBottomOf="@+id/iv_movie" />
 
         <TextView
             android:id="@+id/tv_description"
@@ -48,13 +48,13 @@
             android:fontFamily="sans-serif-medium"
             android:text="2022 \u2022 Science Fiction, Horror, Comedy"
             android:textSize="9sp"
-            app:layout_constraintEnd_toEndOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="@+id/iv_movie"
             app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/tv_megan" />
+            app:layout_constraintStart_toStartOf="@+id/iv_movie"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tittle" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/iv_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
@@ -77,11 +77,11 @@
             android:textColor="#29282C"
             android:textSize="12sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_rating"
             app:layout_constraintEnd_toEndOf="@+id/tv_description"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toTopOf="@+id/imageView2"
+            app:layout_constraintStart_toEndOf="@+id/iv_rating"
+            app:layout_constraintTop_toTopOf="@+id/iv_rating"
             app:layout_constraintVertical_bias="1.0" />
 
         <TextView
