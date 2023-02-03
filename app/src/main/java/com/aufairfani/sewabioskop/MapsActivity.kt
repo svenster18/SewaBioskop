@@ -1,7 +1,9 @@
 package com.aufairfani.sewabioskop
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -14,8 +16,13 @@ import com.aufairfani.sewabioskop.databinding.ActivityMapsBinding
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
+    companion object {
+        const val EXTRA_MOVIE = "extra_movie"
+    }
+
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
+    private var movie: ItemsItem? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +31,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         setContentView(binding.root)
 
         supportActionBar?.title = "Pilih Bioskop"
+
+        movie = if (Build.VERSION.SDK_INT >= 33) {
+            intent.getParcelableExtra(EXTRA_MOVIE, ItemsItem::class.java)
+        } else {
+            @Suppress("DEPRECATION")
+            intent.getParcelableExtra(EXTRA_MOVIE)
+        }
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
@@ -52,7 +66,27 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(midPoint, 14f))
 
         mMap.setOnMarkerClickListener {marker ->
-            Toast.makeText(this@MapsActivity, marker.title, Toast.LENGTH_SHORT).show()
+            val mFragmentManager = supportFragmentManager
+            val mReservationFragment = ReservationFragment()
+            val fragment = mFragmentManager.findFragmentByTag(ReservationFragment::class.java.simpleName)
+
+            if (movie != null) {
+                val mBundle = Bundle()
+                mBundle.putString(ReservationFragment.EXTRA_IMAGE, movie!!.image)
+                mBundle.putString(ReservationFragment.EXTRA_TITLE, movie!!.title)
+                mBundle.putString(ReservationFragment.EXTRA_GENRES, movie!!.genres)
+                mBundle.putString(ReservationFragment.EXTRA_CINEMA, marker.title)
+
+                mReservationFragment.arguments = mBundle
+
+                if (fragment !is ReservationFragment) {
+                    Log.d("MapsActivity", "Fragment Name :" + ReservationFragment::class.java.simpleName)
+                    mFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.map, mReservationFragment, ReservationFragment::class.java.simpleName)
+                        .commit()
+                }
+            }
             true
         }
     }

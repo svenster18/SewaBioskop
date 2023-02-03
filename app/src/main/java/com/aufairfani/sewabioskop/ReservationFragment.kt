@@ -5,28 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ReservationFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+import com.aufairfani.sewabioskop.databinding.FragmentReservationBinding
+import com.bumptech.glide.Glide
 class ReservationFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private var _binding: FragmentReservationBinding? = null
+    private val binding get() = _binding!!
+
+    companion object {
+        const val EXTRA_IMAGE = "extra_image"
+        const val EXTRA_TITLE = "extra_title"
+        const val EXTRA_GENRES = "extra_genres"
+        const val EXTRA_CINEMA = "extra_cinema"
     }
 
     override fun onCreateView(
@@ -34,26 +24,30 @@ class ReservationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_reservation, container, false)
+        _binding = FragmentReservationBinding.inflate(inflater, container, false)
+        val view = binding.root
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ReservationFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ReservationFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        if (arguments != null) {
+            var image = arguments?.getString(EXTRA_IMAGE)
+            var title = arguments?.getString(EXTRA_TITLE)
+            var genres = arguments?.getString(EXTRA_GENRES)
+            var cinema = arguments?.getString(EXTRA_CINEMA)
+            Glide.with(requireActivity())
+                .load(image)
+                .into(binding.ivMovieOrder)
+            binding.tvTitleOrder.text = title
+            binding.tvGenreOrder.text = genres
+            binding.tvCinema.text = cinema
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
