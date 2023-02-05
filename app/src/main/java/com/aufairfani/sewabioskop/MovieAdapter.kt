@@ -11,7 +11,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.RequestOptions.bitmapTransform
-import jp.wasabeef.glide.transformations.BlurTransformation
 
 class MovieAdapter(private val listMovie: List<ItemsItem>) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder =
